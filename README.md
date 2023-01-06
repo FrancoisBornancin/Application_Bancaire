@@ -16,8 +16,8 @@ User mail and mdp:
 - 'testMail3', 'testMdp3'
 
 ## Navigate throw app
-- Users and Admin have to send the SMS they after login to enter into the app
-- Users can only Read his files
+- Users and Admin have to send the SMS they got after login to enter into the app
+- Users can only Read their files
 - Admin can Read all users' files and Create, Delete or Update.
 
 ## SQL
