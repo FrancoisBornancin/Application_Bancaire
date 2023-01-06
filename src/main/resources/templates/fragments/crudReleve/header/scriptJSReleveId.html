@@ -1,0 +1,8 @@
+<script th:fragment="elements">
+    function updateReleve(bouton, id){
+        var span = document.getElementsByTagName("span")[bouton + 1].innerHTML;
+        var input = document.getElementsByTagName("input")[bouton - 1].value;
+        console.log(span);
+        getAjax("/AjaxUpdateField/" + span + "/" + input + "/" + id, span + "Message")
+    }
+</script>

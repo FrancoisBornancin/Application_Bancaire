@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="bootstrap1.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <header class="header">
+        <p class="title">Connectez-vous</p>
+    </header>
+    <div class="section-divider"></div>
+    <main class="main-background">
+        <form th:action="@{/testLoginRoute}" method="post" th:object="${form}">
+            Mail: <input type="text" th:field="*{email}" class="form-control"/>
+            <p th:text="${mailMessage}"></p>
+            Mot de passe: <input type="text" th:field="*{mdp}" class="form-control"  />
+            <input type="submit" value="Login" class="btn btn-outline-success" />
+            <p th:text="${mdpMessage}" ></p>
+        </form>
+    </main>
+    <div class="section-divider"></div>
+    <footer></footer>
+</body>
+</html>

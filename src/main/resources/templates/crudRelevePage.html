@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8">
+    <title>Administrateurs</title>
+    <link th:href="@{/bootstrap1.css}" rel="stylesheet">
+    <link th:href="@{/styles.css}" rel="stylesheet">
+    <script>
+
+        function getAjax(route, id){
+            var XHR = new XMLHttpRequest();
+            XHR.open('get', route);
+            XHR.send();
+            XHR.addEventListener('readystatechange', function (){
+                if(XHR.readyState == 4 && XHR.status == 200){
+                    document.getElementById(id).innerHTML = XHR.responseText;
+                }
+            })
+        }
+
+    </script>
+
+    <div th:replace="${cheminHeader} :: ${fragmentHeader}"></div>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <a th:href="@{/readReleveRoute}" class="btn btn-outline-success">Liste des relevés</a>
+            <div th:utext="${button}" ></div>
+        </div>
+        <p class="title">Administrateurs</p>
+        <div class="user" ><span th:text="${prenom}" ></span>: <span th:text="${role}" ></span></div>
+    </header>
+    <div class="section-divider" ></div>
+    <main th:replace="${cheminBody} :: ${fragmentBody}"></main>
+    <div class="section-divider" ></div>
+    <footer>
+        <a th:href="@{/restartApp}" class="btn btn-outline-warning">Deconnexion</a>
+    </footer>
+</body>
+</html>

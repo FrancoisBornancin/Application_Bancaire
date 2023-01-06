@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Relevés</title>
+    <link th:href="@{/bootstrap1.css}" rel="stylesheet">
+    <link th:href="@{/styles.css}" rel="stylesheet">
+    <script>
+
+        var count = [[${count}]];
+
+        function getAjax(route, id){
+            var XHR = new XMLHttpRequest();
+            XHR.open('get', route);
+            XHR.send();
+            XHR.addEventListener('readystatechange', function (){
+                if(XHR.readyState == 4 && XHR.status == 200){
+                    document.getElementById(id).innerHTML = XHR.responseText;
+                }
+            })
+        }
+        var input = document.getElementsByTagName("input");
+        function checkElements(){
+            var span = document.getElementsByTagName("span");
+            var select = document.getElementsByTagName("select");
+            var name = new Array();
+            var value = new Array();
+            for(let a = 0 ; a < count ; a++){
+                if(input[a].checked){
+                    name.push(span[a + 2].innerHTML);
+                    value.push(select[a].value);
+                }
+            }
+            getAjax('/AjaxReadReleveRoute_ListReleveBy/' + name + "/" + value, "listReleve");
+        }
+
+        function displayAllListReleve(){
+            for(let a = 0 ; a < count ; a++){
+                if(input[a].checked){
+                    input[a].checked = false;
+                }
+            }
+            getAjax('/AjaxReadReleveRoute_ListReleve', "listReleve")
+        }
+        function deleteReleve(id){ getAjax("/crudReleveRouteSuppression/" + id, "listReleve") }
+    </script>
+
+</head>
+<body class="readReleve" >
+    <header class="header">
+        <div th:utext="${button}" ></div>
+        <p class="title">Relevés</p>
+        <div class="user" >
+            <span th:text="${prenom}" ></span>: <span th:text="${role}" ></span>
+        </div>
+    </header>
+    <div class="section-divider" ></div>
+    <main class="main-background" >
+        <button onclick="displayAllListReleve()" class="btn btn-outline-info" >Liste Complète</button>
+
+        <div th:utext="${select}" class="select-options" ></div>
+
+        <!-- AJAX -->
+        <div id="listReleve"></div>
+    </main>
+    <div class="section-divider" ></div>
+    <footer>
+        <a href="/restartApp" class="btn btn-outline-warning">Deconnexion</a>
+    </footer>
+</body>
+</html>

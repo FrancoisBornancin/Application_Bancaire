@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link th:href="@{/bootstrap1.css}" rel="stylesheet">
+    <link th:href="@{/styles.css}" rel="stylesheet">
+
+    <script th:inline="javascript">
+        var milliSecondsToWait = [[${wait}]]; var messageLength = [[${messageLength}]];
+        var loginSucess = [[${loginSucess}]] ;
+
+        <!-- Rappel: Si goToRoute == true, on redirige vers la route /newRoute -->
+        if(loginSucess == true){
+            setTimeout(function() {
+                document.location.reload();
+            }, (milliSecondsToWait * (messageLength + 2)));
+        }
+
+        <!-- Relance l'Ajax afin de voir l'évolution du StringBuilder -->
+        for(let i = 1; i < messageLength + 1; i++){
+            setTimeout(function() {
+                var XHR = new XMLHttpRequest();
+                XHR.open('get', '/AjaxLostRoute_PrintMessage');
+                XHR.send();
+                XHR.addEventListener('readystatechange', function (){
+                    if(XHR.readyState == 4 && XHR.status == 200){
+                        document.getElementById("printMessage").innerHTML = XHR.responseText;
+                    }
+                })
+            }, (i) * milliSecondsToWait);
+        }
+    </script>
+</head>
+<body>
+    <header class="header" >
+        <p class="title" >Welcome</p>
+    </header>
+    <div class="section-divider" ></div>
+    <main class="main-background" >
+        <div id="printMessage"></div>
+        <div th:utext="${displayNone}"></div>
+    </main>
+    <div class="section-divider" ></div>
+    <footer></footer>
+</body>
+</html>
+
+
+

@@ -1,0 +1,27 @@
+<main th:fragment="releve" >
+	<section class="main-background" >
+		<h3>Créer/Supprimer un champ:</h3>
+
+		<form th:action="@{/InsertChamp}" method="post" th:object="${insertForm}">
+			<label>Créer champ</label>
+			Name: <input type="text" th:field="*{name}" class="form-control" />
+			Type: <select th:field="*{type}" class="form-select" >
+			<option th:value="Integer" >Integer</option>
+			<option th:value="String"  >String</option>
+		</select>
+			<input type="submit" value="Insérer" class="btn btn-outline-info" />
+		</form>
+
+		<form th:action="@{/DeleteChamp}" method="post" th:object="${deleteForm}">
+			<label>Supprimer champ</label>
+			Nom: <select th:field="*{name}" th:utext="${deleteChamp}" class="form-select" ></select>
+			<input type="submit" value="Supprimer" class="btn btn-outline-danger" />
+		</form>
+	</section>
+	<div class="section-divider" ></div>
+	<section class="main-background" >
+		<div id="display"></div>
+		<h3>Créer un nouveau relevé: </h3>
+		<div th:utext="${insertReleve}" ></div>
+	</section>
+</main>

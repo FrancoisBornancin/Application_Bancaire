@@ -1,0 +1,16 @@
+<script th:fragment="elements" th:inline="javascript" >
+
+    var count = [[${count}]];
+
+    function sendReleve(){
+        var input = document.getElementsByTagName("input");
+        var span = document.getElementsByTagName("span");
+        var name = new Array();
+        var value = new Array();
+        for(let a = 0 ; a < count ; a++){
+            name.push(span[a + 2].innerHTML);
+            value.push(input[a + 3].value);
+        }
+        getAjax("/AjaxSendReleve/" + name + "/" + value, "display")
+    };
+</script>

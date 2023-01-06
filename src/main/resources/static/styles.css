@@ -1,0 +1,81 @@
+.select-options{
+    display: flex;
+}
+.button-select{
+    border-radius: 0.25rem;
+    border: 1px solid #0b0c0c;
+    background-color: rgb(219 239 255);
+    font-style: italic;
+    font-weight: bold;
+    padding: 8px;
+}
+.upper-tr{
+    font-style: italic;
+    font-weight: bold;
+}
+.inner-tr{
+    font-style: italic;
+    text-align: center;
+}
+.inner-td{
+    border: 2px grey solid;
+    padding: 8px;
+}
+.form-control{
+    margin: 5px;
+}
+.form-select{
+    margin: 5px;
+    font-style: italic;
+}
+.message{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 22px;
+}
+.btn{
+    background-color: whitesmoke;
+}
+.section-divider{
+    padding: 10px;
+    background-color: #d4c6c6;
+}
+.main-background{
+    background-color: whitesmoke;
+    padding: 14px;
+}
+p{
+    font-weight: bold;
+}
+.header{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.title{
+    padding-top: 17px;
+    font-size: 43px;
+}
+.user{
+    font-style: italic;
+    border: 1px solid grey;
+    background-color: whitesmoke;
+    border-color: grey;
+    border-radius: 0.25rem;
+    padding: 4px;
+}
+.header, footer{
+    background-color: rgb(235 165 165);
+    padding: 7px;
+}
+footer{
+    padding-bottom: 300px;
+}
+table{
+    width: 100%;
+}
+.readReleve{
+    width: 98.7vw;
+}

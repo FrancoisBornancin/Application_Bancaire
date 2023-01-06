@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureKey</title>
+    <link th:href="@{/bootstrap1.css}" rel="stylesheet">
+    <link th:href="@{/styles.css}" rel="stylesheet">
+    <script>
+        var millisecondsToWait = [[${ms}]];
+        var secondes = [[${sec}]];
+
+        setTimeout(function() {
+            document.location.reload();
+        }, (secondes) * millisecondsToWait);
+
+        <!-- Affiche le décompte -->
+        for(let i = 1; i < secondes + 1; i++){
+            setTimeout(function() {
+                var XHR = new XMLHttpRequest();
+                XHR.open('get', '/AjaxSecureKeyRoute_CountDown');
+                XHR.send();
+                XHR.addEventListener('readystatechange', function (){
+                    if(XHR.readyState == 4 && XHR.status == 200){
+                        document.getElementById("countDown").innerHTML = XHR.responseText;
+                    }
+                })
+            }, (i) * millisecondsToWait);
+        }
+
+        <!-- Affiche la secureKey -->
+        function displaySecureKey(){
+            var XHR = new XMLHttpRequest();
+            XHR.open('get', '/AjaxSecureKeyRoute_SecureKey');
+            XHR.send();
+            XHR.addEventListener('readystatechange', function (){
+                if(XHR.readyState == 4 && XHR.status == 200){
+                    document.getElementById("SMS").innerHTML = XHR.responseText;
+                }
+            })
+        }
+
+    </script>
+
+</head>
+<body>
+    <header class="header" >
+        <p class="title">Clé de Sécurité</p>
+    </header>
+    <div class="section-divider" ></div>
+    <main class="main-background" >
+        <!-- AJAX -->
+        <div id="countDown"><h1>Il reste: <span th:text = "${sec}"></span> secondes</h1></div>
+
+        <form th:action="@{/testSecureKeyRoute}" method="post" th:object="${form}">
+            <legend>Veuillez rentrer le code reçu par sms:</legend>
+            <input type="text" th:field="*{secureKey}" class="form-control" />
+            <input type = "submit" value = "OK" class="btn btn-outline-success" />
+        </form>
+        <br><br><br>
+        <button onclick="displaySecureKey()" class="btn btn-outline-info" >SMS</button>
+        <div id="SMS"></div>
+    </main>
+
+     <!-- AJAX -->
+    <div class="section-divider" ></div>
+    <footer></footer>
+
+</body>
+</html>
+
